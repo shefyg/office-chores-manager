@@ -1,0 +1,23 @@
+[
+  {
+    "id": "0ad7c120-ba30-4370-b9db-b6858badd8d6",
+    "name": "שפי גור-ארי",
+    "email": "shefyg@gmail.com",
+    "color": "#EF4444",
+    "createdAt": "2026-02-11T19:24:33.654Z"
+  },
+  {
+    "id": "a96d15e8-49cf-4e39-b3ac-02f6c1004610",
+    "name": "קרן גור-ארי",
+    "email": "kerengur26@gmail.com",
+    "color": "#EC4899",
+    "createdAt": "2026-02-11T19:24:57.044Z"
+  },
+  {
+    "id": "1d966ac6-f987-44a5-b0e7-3d3ad2eb6db9",
+    "name": "נעמה גור-ארי",
+    "email": "naamagur18@gmail.com",
+    "color": "#10B981",
+    "createdAt": "2026-02-11T19:25:23.105Z"
+  }
+]

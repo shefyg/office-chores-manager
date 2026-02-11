@@ -1,0 +1,36 @@
+[
+  {
+    "id": "208e8854-cda9-4d3c-95a0-6d3261e27587",
+    "title": "לנקות את המטבח",
+    "description": "כלים, שיש, רצפה ארונות",
+    "assigneeId": "0ad7c120-ba30-4370-b9db-b6858badd8d6",
+    "priority": "high",
+    "notes": "",
+    "status": "pending",
+    "dueDate": "2026-02-12",
+    "recurrence": {
+      "type": "daily"
+    },
+    "createdAt": "2026-02-11T19:26:14.435Z",
+    "updatedAt": "2026-02-11T19:26:14.435Z"
+  },
+  {
+    "id": "187c2ac4-f32b-4a87-94a0-a40a5b369806",
+    "title": "לקחת את אגם למועדונית ",
+    "description": "לקחת ולהחזיר",
+    "assigneeId": "a96d15e8-49cf-4e39-b3ac-02f6c1004610",
+    "priority": "high",
+    "notes": "להביא לקראת 17, לאסוף ב 19:30",
+    "status": "pending",
+    "dueDate": "2026-02-11",
+    "recurrence": {
+      "type": "weekly",
+      "daysOfWeek": [
+        2,
+        4
+      ]
+    },
+    "createdAt": "2026-02-11T19:27:10.103Z",
+    "updatedAt": "2026-02-11T19:27:10.103Z"
+  }
+]
