@@ -86,6 +86,22 @@ Server runs on port 3001 (or PORT env var). Health check: `GET /api/health`
 - Container components manage state, presentational components render (`client/src/components/Calendar/CalendarView.jsx:9`)
 - API client centralizes all fetch calls (`client/src/services/api.js:3`)
 
+## Adding New Features
+
+**New API endpoint:**
+1. Add route handler in `server/routes/` (follow REST pattern)
+2. Add business logic in `server/services/`
+3. Add client function in `client/src/services/api.js`
+
+**New component:**
+1. Create in appropriate `client/src/components/` subdirectory
+2. Use `useState`/`useEffect` hooks for state and data fetching
+3. Follow container/presentational pattern (see architectural patterns doc)
+
+**New utility:**
+- Date-related: add to `client/src/utils/dateUtils.js`
+- Recurrence-related: add to `client/src/utils/recurrence.js`
+
 ## Additional Documentation
 
 - `.claude/docs/architectural_patterns.md` - Design patterns, conventions, and architectural decisions
