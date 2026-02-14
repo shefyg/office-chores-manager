@@ -164,6 +164,13 @@ function CalendarView() {
         </div>
       </div>
 
+      <div className="flex items-center gap-2 mb-3 px-3 py-2 bg-blue-50 border border-blue-200 rounded-md text-sm text-blue-700">
+        <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Hold <kbd className="px-1.5 py-0.5 bg-blue-100 border border-blue-300 rounded text-xs font-mono font-semibold">Shift</kbd> and hover over a chore to quickly preview its details</span>
+      </div>
+
       {view === 'month' ? (
         <MonthView
           currentDate={currentDate}
