@@ -1,9 +1,12 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { EventEmitter } from 'events';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = path.join(__dirname, '..', 'data');
+
+export const storageEmitter = new EventEmitter();
 
 export async function readData(filename) {
   try {
@@ -21,4 +24,5 @@ export async function readData(filename) {
 export async function writeData(filename, data) {
   const filePath = path.join(DATA_DIR, filename);
   await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
+  storageEmitter.emit('dataChanged', filename);
 }

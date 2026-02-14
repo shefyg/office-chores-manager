@@ -1,20 +1,24 @@
 import { useState, useEffect } from 'react';
 import { fetchHistory, fetchTeam } from '../../services/api';
+import { useSync } from '../../hooks/useSync';
 
 function HistoryView() {
   const [history, setHistory] = useState([]);
   const [team, setTeam] = useState([]);
   const [filter, setFilter] = useState('all');
 
+  const loadData = async () => {
+    const [historyData, teamData] = await Promise.all([
+      fetchHistory(),
+      fetchTeam()
+    ]);
+    setHistory(historyData);
+    setTeam(teamData);
+  };
+
+  useSync(['history'], loadData);
+
   useEffect(() => {
-    const loadData = async () => {
-      const [historyData, teamData] = await Promise.all([
-        fetchHistory(),
-        fetchTeam()
-      ]);
-      setHistory(historyData);
-      setTeam(teamData);
-    };
     loadData();
   }, []);
 
