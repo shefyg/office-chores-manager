@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import MemberForm from './MemberForm';
 import Modal from '../common/Modal';
 import { fetchTeam, deleteMember } from '../../services/api';
+import { useSync } from '../../hooks/useSync';
 
 function TeamList() {
   const [team, setTeam] = useState([]);
@@ -12,6 +13,8 @@ function TeamList() {
     const data = await fetchTeam();
     setTeam(data);
   };
+
+  useSync(['team'], loadTeam);
 
   useEffect(() => {
     loadTeam();

@@ -5,6 +5,7 @@ import ChoreForm from '../Chores/ChoreForm';
 import ChoreDetails from '../Chores/ChoreDetails';
 import Modal from '../common/Modal';
 import { fetchChores, fetchTeam } from '../../services/api';
+import { useSync } from '../../hooks/useSync';
 
 function CalendarView() {
   const [view, setView] = useState('month');
@@ -28,6 +29,8 @@ function CalendarView() {
     setChores(choresData);
     setTeam(teamData);
   };
+
+  useSync(['chores', 'team'], loadData);
 
   useEffect(() => {
     loadData();
