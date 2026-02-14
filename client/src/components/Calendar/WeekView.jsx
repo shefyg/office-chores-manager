@@ -1,8 +1,41 @@
+import { useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { getWeekDays, isSameDay, formatDate } from '../../utils/dateUtils';
 import { expandRecurrence } from '../../utils/recurrence';
 import ChoreCard from '../Chores/ChoreCard';
+import ChorePreview from '../Chores/ChorePreview';
 
 function WeekView({ currentDate, chores, team, onDateClick, onChoreClick }) {
+  const [hoveredChore, setHoveredChore] = useState(null);
+  const [hoveredMember, setHoveredMember] = useState(null);
+  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+
+  const handleKeyUp = useCallback((e) => {
+    if (e.key === 'Shift') {
+      setHoveredChore(null);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (hoveredChore) {
+      window.addEventListener('keyup', handleKeyUp);
+      return () => window.removeEventListener('keyup', handleKeyUp);
+    }
+  }, [hoveredChore, handleKeyUp]);
+
+  const handleChoreMouseMove = (e, chore) => {
+    if (e.shiftKey) {
+      setHoveredChore(chore);
+      setHoveredMember(getMember(chore.assigneeId));
+      setTooltipPos({ x: e.clientX + 12, y: e.clientY + 12 });
+    } else {
+      setHoveredChore(null);
+    }
+  };
+
+  const handleChoreMouseLeave = () => {
+    setHoveredChore(null);
+  };
   const days = getWeekDays(currentDate);
   const today = new Date();
 
@@ -54,18 +87,35 @@ function WeekView({ currentDate, chores, team, onDateClick, onChoreClick }) {
             >
               <div className="space-y-2">
                 {dayChores.map((chore, idx) => (
-                  <ChoreCard
+                  <div
                     key={`${chore.id}-${idx}`}
-                    chore={chore}
-                    member={getMember(chore.assigneeId)}
-                    onClick={() => onChoreClick(chore)}
-                  />
+                    onMouseMove={(e) => handleChoreMouseMove(e, chore)}
+                    onMouseLeave={handleChoreMouseLeave}
+                  >
+                    <ChoreCard
+                      chore={chore}
+                      member={getMember(chore.assigneeId)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onChoreClick(chore);
+                      }}
+                    />
+                  </div>
                 ))}
               </div>
             </div>
           );
         })}
       </div>
+      {hoveredChore && createPortal(
+        <div
+          className="fixed z-50 bg-white rounded-lg shadow-lg border border-gray-200 pointer-events-none"
+          style={{ left: tooltipPos.x, top: tooltipPos.y }}
+        >
+          <ChorePreview chore={hoveredChore} member={hoveredMember} />
+        </div>,
+        document.body
+      )}
     </div>
   );
 }

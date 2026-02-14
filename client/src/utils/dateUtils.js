@@ -31,8 +31,7 @@ export function getMonthDays(date) {
 export function getWeekDays(date) {
   const days = [];
   const dayOfWeek = date.getDay();
-  const startOfWeek = new Date(date);
-  startOfWeek.setDate(date.getDate() - dayOfWeek);
+  const startOfWeek = new Date(date.getFullYear(), date.getMonth(), date.getDate() - dayOfWeek);
 
   for (let i = 0; i < 7; i++) {
     const d = new Date(startOfWeek);
