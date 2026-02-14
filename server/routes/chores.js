@@ -32,7 +32,7 @@ router.get('/:id', async (req, res) => {
 // POST /api/chores - Create a new chore
 router.post('/', async (req, res) => {
   try {
-    const { title, description, assigneeId, priority, notes, dueDate, dueTime, recurrence } = req.body;
+    const { title, description, assigneeId, priority, notes, dueDate, dueTime, recurrence, color } = req.body;
     if (!title) {
       return res.status(400).json({ error: 'Title is required' });
     }
@@ -47,7 +47,8 @@ router.post('/', async (req, res) => {
       notes,
       dueDate,
       dueTime,
-      recurrence
+      recurrence,
+      color
     });
     res.status(201).json(chore);
   } catch (error) {
@@ -60,7 +61,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, assigneeId, priority, notes, status, dueDate, dueTime, recurrence } = req.body;
+    const { title, description, assigneeId, priority, notes, status, dueDate, dueTime, recurrence, color } = req.body;
     const chore = await choreService.updateChore(id, {
       title,
       description,
@@ -70,7 +71,8 @@ router.put('/:id', async (req, res) => {
       status,
       dueDate,
       dueTime,
-      recurrence
+      recurrence,
+      color
     });
     if (!chore) {
       return res.status(404).json({ error: 'Chore not found' });

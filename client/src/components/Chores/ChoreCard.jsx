@@ -7,12 +7,20 @@ function ChoreCard({ chore, member, compact, onClick }) {
 
   const statusStyles = chore.status === 'completed' ? 'opacity-60 line-through' : '';
 
+  const choreColorStyle = chore.color
+    ? { backgroundColor: `${chore.color}20`, borderLeftColor: member?.color }
+    : { borderLeftColor: member?.color };
+
+  const choreColorStyleExpanded = chore.color
+    ? { backgroundColor: `${chore.color}20`, borderLeftColor: member?.color || '#9CA3AF' }
+    : { borderLeftColor: member?.color || '#9CA3AF' };
+
   if (compact) {
     return (
       <div
         onClick={onClick}
-        className={`text-xs p-1 rounded border-l-2 ${priorityColors[chore.priority] || 'border-l-gray-300'} bg-white shadow-sm cursor-pointer hover:shadow ${statusStyles}`}
-        style={{ borderLeftColor: member?.color }}
+        className={`text-xs p-1 rounded border-l-2 ${priorityColors[chore.priority] || 'border-l-gray-300'} ${chore.color ? '' : 'bg-white'} shadow-sm cursor-pointer hover:shadow ${statusStyles}`}
+        style={choreColorStyle}
       >
         <div className="truncate">{chore.dueTime && <span className="font-medium">{chore.dueTime} </span>}{chore.title}</div>
       </div>
@@ -22,8 +30,8 @@ function ChoreCard({ chore, member, compact, onClick }) {
   return (
     <div
       onClick={onClick}
-      className={`p-2 rounded border-l-4 bg-white shadow-sm cursor-pointer hover:shadow-md transition-shadow ${statusStyles}`}
-      style={{ borderLeftColor: member?.color || '#9CA3AF' }}
+      className={`p-2 rounded border-l-4 ${chore.color ? '' : 'bg-white'} shadow-sm cursor-pointer hover:shadow-md transition-shadow ${statusStyles}`}
+      style={choreColorStyleExpanded}
     >
       <div className="flex items-start justify-between">
         <div className="font-medium text-sm truncate">{chore.title}</div>
