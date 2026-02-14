@@ -86,7 +86,9 @@ Server runs on port 3001 (or PORT env var). Health check: `GET /api/health`
 - Container components manage state, presentational components render (`client/src/components/Calendar/CalendarView.jsx:9`)
 - API client centralizes all fetch calls (`client/src/services/api.js:3`)
 
-## Adding New Features
+## Adding New Features or Fixing Bugs
+
+**IMPORTANT**: When you work on a new feature or bug, create a git branch first. Then work on changes in that branch for the remainder of the session.
 
 **New API endpoint:**
 1. Add route handler in `server/routes/` (follow REST pattern)
