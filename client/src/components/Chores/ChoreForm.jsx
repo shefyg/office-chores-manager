@@ -8,6 +8,7 @@ function ChoreForm({ chore, team, initialDate, onSave, onCancel }) {
     description: chore?.description || '',
     assigneeId: chore?.assigneeId || '',
     priority: chore?.priority || 'medium',
+    color: chore?.color || '',
     notes: chore?.notes || '',
     dueDate: chore?.dueDate || (initialDate ? formatDateForInput(initialDate) : formatDateForInput(new Date())),
     dueTime: chore?.dueTime || '',
@@ -155,6 +156,32 @@ function ChoreForm({ chore, team, initialDate, onSave, onCancel }) {
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Color
+        </label>
+        <div className="flex items-center space-x-2">
+          <input
+            type="color"
+            value={formData.color || '#3b82f6'}
+            onChange={(e) => setFormData(prev => ({ ...prev, color: e.target.value }))}
+            className="w-10 h-10 rounded cursor-pointer border border-gray-300"
+          />
+          {formData.color && (
+            <button
+              type="button"
+              onClick={() => setFormData(prev => ({ ...prev, color: '' }))}
+              className="text-xs text-gray-500 hover:text-gray-700 underline"
+            >
+              Clear
+            </button>
+          )}
+          {!formData.color && (
+            <span className="text-xs text-gray-400">No color set</span>
+          )}
+        </div>
       </div>
 
       <div>

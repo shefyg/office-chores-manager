@@ -21,7 +21,13 @@ function ChorePreview({ chore, member }) {
   return (
     <div className="w-64 p-3 space-y-2 text-sm">
       <div className="flex items-start justify-between gap-2">
-        <span className={`font-semibold text-gray-900 ${chore.status === 'completed' ? 'line-through opacity-60' : ''}`}>
+        <span className={`font-semibold text-gray-900 flex items-center gap-1.5 ${chore.status === 'completed' ? 'line-through opacity-60' : ''}`}>
+          {chore.color && (
+            <span
+              className="inline-block w-2.5 h-2.5 rounded-full shrink-0"
+              style={{ backgroundColor: chore.color }}
+            />
+          )}
           {chore.title}
         </span>
         <span className={`shrink-0 px-1.5 py-0.5 text-xs rounded ${priorityLabel[chore.priority]?.class || 'bg-gray-100'}`}>
