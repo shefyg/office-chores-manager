@@ -14,6 +14,11 @@ function CalendarView() {
   const [showChoreForm, setShowChoreForm] = useState(false);
   const [selectedChore, setSelectedChore] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [filterMemberId, setFilterMemberId] = useState('');
+
+  const filteredChores = filterMemberId
+    ? chores.filter(chore => chore.assigneeId === filterMemberId)
+    : chores;
 
   const loadData = async () => {
     const [choresData, teamData] = await Promise.all([
@@ -140,6 +145,16 @@ function CalendarView() {
               Week
             </button>
           </div>
+          <select
+            value={filterMemberId}
+            onChange={(e) => setFilterMemberId(e.target.value)}
+            className="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+          >
+            <option value="">All Members</option>
+            {team.map(member => (
+              <option key={member.id} value={member.id}>{member.name}</option>
+            ))}
+          </select>
           <button
             onClick={() => setShowChoreForm(true)}
             className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
@@ -152,7 +167,7 @@ function CalendarView() {
       {view === 'month' ? (
         <MonthView
           currentDate={currentDate}
-          chores={chores}
+          chores={filteredChores}
           team={team}
           onDateClick={handleDateClick}
           onChoreClick={handleChoreClick}
@@ -160,7 +175,7 @@ function CalendarView() {
       ) : (
         <WeekView
           currentDate={currentDate}
-          chores={chores}
+          chores={filteredChores}
           team={team}
           onDateClick={handleDateClick}
           onChoreClick={handleChoreClick}
