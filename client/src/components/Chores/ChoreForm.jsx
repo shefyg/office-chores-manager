@@ -10,6 +10,7 @@ function ChoreForm({ chore, team, initialDate, onSave, onCancel }) {
     priority: chore?.priority || 'medium',
     notes: chore?.notes || '',
     dueDate: chore?.dueDate || (initialDate ? formatDateForInput(initialDate) : formatDateForInput(new Date())),
+    dueTime: chore?.dueTime || '',
     recurrence: chore?.recurrence || null
   });
 
@@ -94,7 +95,7 @@ function ChoreForm({ chore, team, initialDate, onSave, onCancel }) {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-3 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Due Date *
@@ -105,6 +106,19 @@ function ChoreForm({ chore, team, initialDate, onSave, onCancel }) {
             value={formData.dueDate}
             onChange={handleChange}
             required
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Time
+          </label>
+          <input
+            type="time"
+            name="dueTime"
+            value={formData.dueTime}
+            onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>

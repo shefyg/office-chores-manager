@@ -14,7 +14,7 @@ function ChoreCard({ chore, member, compact, onClick }) {
         className={`text-xs p-1 rounded border-l-2 ${priorityColors[chore.priority] || 'border-l-gray-300'} bg-white shadow-sm cursor-pointer hover:shadow ${statusStyles}`}
         style={{ borderLeftColor: member?.color }}
       >
-        <div className="truncate">{chore.title}</div>
+        <div className="truncate">{chore.dueTime && <span className="font-medium">{chore.dueTime} </span>}{chore.title}</div>
       </div>
     );
   }

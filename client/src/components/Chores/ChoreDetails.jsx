@@ -89,6 +89,7 @@ function ChoreDetails({ chore, team, onUpdate, onClose }) {
               month: 'long',
               day: 'numeric'
             })}
+            {chore.dueTime && ` at ${chore.dueTime}`}
           </p>
         </div>
         <div>

@@ -24,6 +24,7 @@ export async function createChore(data) {
     notes: data.notes || '',
     status: 'pending',
     dueDate: data.dueDate,
+    dueTime: data.dueTime || null,
     recurrence: data.recurrence || null,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
@@ -48,6 +49,7 @@ export async function updateChore(id, data) {
     notes: data.notes ?? chores[index].notes,
     status: data.status ?? chores[index].status,
     dueDate: data.dueDate ?? chores[index].dueDate,
+    dueTime: data.dueTime !== undefined ? data.dueTime : chores[index].dueTime,
     recurrence: data.recurrence !== undefined ? data.recurrence : chores[index].recurrence,
     updatedAt: new Date().toISOString()
   };
